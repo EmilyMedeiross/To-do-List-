@@ -1,0 +1,85 @@
+body {
+  background-color: white;
+  color: black;
+}
+
+
+body.dark-mode,
+body.dark-theme {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+.task-item {
+  background: #f8f9fa;
+  color: #212529;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+}
+
+body.dark-mode .task-item,
+body.dark-theme .task-item {
+  background: #2d2d2d;
+  color: #f8f9fa;
+}
+
+/* Estilo da tarefa com base na prioridade */
+.priority-alta {
+  border-left: 6px solid #dc3545; /* vermelho */
+}
+
+.priority-intermediaria {
+  border-left: 6px solid #ffc107; /* amarelo */
+}
+
+.priority-baixa {
+  border-left: 6px solid #198754; /* verde */
+}
+
+.priority-não\ definida {
+  border-left: 6px solid #6c757d; /* cinza */
+}
+
+.icon-button {
+  color: #495057;
+}
+
+body.dark-mode .icon-button,
+body.dark-theme .icon-button {
+  color: #f8f9fa;
+}
+
+/* Modal */
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-conteudo {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+.fechar {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.fechar:hover {
+  color: black;
+}
