@@ -102,23 +102,25 @@ export default function List() {
         <>
             <h1>FocoList</h1>
 
+        
             <ChangeBackground />
 
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className='input-add'>
                     <label>
                         <span className='titulos'>Nome da tarefa:</span>
                         <input
                             type="text"
                             onChange={(e) => setTarefa(e.target.value)}
                             value={tarefa}
-                            placeholder="Digite sua tarefa"
+                            placeholder="Ex: Estudar React"
                             required
                         />
                     </label>
+                    <input className='btn btn-add' type="submit" value="Adicionar Tarefa" />
                 </div>
 
-                <div>
+                <div className='input-forms'>
                     <label>
                         <span className='titulos'>Prioridade da tarefa:</span>
                         <select
@@ -133,7 +135,7 @@ export default function List() {
                     </label>
                 </div>
 
-                <div>
+                <div className='input-forms'>
                     <label>
                         <span className='titulos'>Data da tarefa:</span>
                         <input
@@ -143,10 +145,6 @@ export default function List() {
                         />
                     </label>
                 </div>
-
-                <input type="submit" value="Adicionar Tarefas" />
-                <input type="button" value="Limpar tarefas" onClick={handleClear} />
-                <input type="button" value="Ver todas as tarefas" onClick={handleClick} />
 
                 {limiteAtingido && (
                     <div className="limite-mensagem">
@@ -161,7 +159,7 @@ export default function List() {
                 <input
                     type="text"
                     value={pesquisa}
-                    placeholder="Digite o nome da tarefa"
+                    placeholder="Ex: Arrumar a Casa"
                     onChange={(ev) => setPesquisa(ev.target.value)}
                 />
 
@@ -175,10 +173,10 @@ export default function List() {
                                     <span>Nome da tarefa: {item.texto} </span><br />
                                     <span>Prioridade: {item.prioridade}</span><br />
                                     <span>Data: {item.data}</span><br />
-                                    <button onClick={() => handleToggle(item.id)} className="icon-button">
+                                    <button onClick={() => handleToggle(item.id)} className="icon-button icon-confirmar">
                                         <FontAwesomeIcon icon={item.status ? faBan : faCheckCircle} />
                                     </button>
-                                    <button onClick={() => handleClearUnique(item.id)} className="icon-button">
+                                    <button onClick={() => handleClearUnique(item.id)} className="icon-button icon-excluir">
                                         <FontAwesomeIcon icon={faTrash} />
                                     </button>
                                 </li>
@@ -188,7 +186,10 @@ export default function List() {
                         <p className="lista-vazia">Nenhuma tarefa encontrada</p>
                     )
                 ) : null}
+        
             </div>
+            <input className='btn btn-limpar' type="button" value="Limpar tarefas" onClick={handleClear} />
+            <input className='btn btn-listar' type="button" value="Ver todas as tarefas" onClick={handleClick} />
 
             {modalAberto && (
                 <div className="modal">
@@ -210,11 +211,11 @@ export default function List() {
                                                 <span>Data: {item.data}</span><br />
                                                 <span>Status: {item.status ? 'Concluída' : 'Pendente'}</span>
 
-                                                <button onClick={() => handleToggle(item.id)} className="icon-button">
+                                                <button onClick={() => handleToggle(item.id)} className=" icon-button icon-confirmar">
                                                     <FontAwesomeIcon icon={item.status ? faBan : faCheckCircle} />
                                                 </button>
 
-                                                <button onClick={() => handleClearUnique(item.id)} className="icon-button">
+                                                <button onClick={() => handleClearUnique(item.id)} className=" icon-button icon-excluir">
                                                     <FontAwesomeIcon icon={faTrash} />
                                                 </button>
                                             </li>

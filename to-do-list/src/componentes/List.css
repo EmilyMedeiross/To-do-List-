@@ -1,8 +1,18 @@
-body {
-  background-color: white;
-  color: black;
+/* Reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  background-color: #f2f0f0;
+  color: #2d3748;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  padding: 2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 body.dark-mode,
 body.dark-theme {
@@ -10,76 +20,257 @@ body.dark-theme {
   color: #f0f0f0;
 }
 
+/* Título */
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2b6cb0;
+  margin-bottom: 1.5rem;
+}
+
+/* Campos de entrada */
+.input-add,
+.input-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-add {
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+input:focus,
+select:focus {
+  border-color: #2b6cb0;
+  outline: none;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #2d2d2d;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.titulos {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Botões */
+
+/* Classe base para todos os botões */
+.btn {
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin: 8px 10px 0 0;
+}
+
+/* Variações de cor específicas para cada botão */
+.btn-add {
+  background-color: #38A169;
+}
+.btn-add:hover,
+.btn-add:focus {
+  background-color: #2f855a;
+  box-shadow: 0 4px 10px rgba(56, 161, 105, 0.3);
+}
+
+.btn-limpar {
+  background-color: #DC3545;
+}
+.btn-limpar:hover,
+.btn-limpar:focus {
+  background-color: #bd2130;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.btn-listar {
+  background-color: #2B6CB0;
+}
+.btn-listar:hover,
+.btn-listar:focus {
+  background-color: #255a92;
+  box-shadow: 0 4px 10px rgba(43, 108, 176, 0.3);
+}
+
+/* Mensagem de limite */
+.limite-mensagem {
+  color: #dc3545;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Lista de tarefas */
+.task-list {
+  margin-top: 2rem;
+}
+
+.task-list input[type="text"] {
+  margin: 10px 0 20px;
+  max-width: 300px;
+}
+
+.lista-vazia {
+  font-style: italic;
+  color: #718096;
+}
+
+/* Estilo das tarefas */
 .task-item {
-  background: #f8f9fa;
+  background: #ededed;
   color: #212529;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-left-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 body.dark-mode .task-item,
 body.dark-theme .task-item {
   background: #2d2d2d;
   color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
 
 /* Estilo da tarefa com base na prioridade */
 .priority-alta {
-  border-left: 6px solid #dc3545; /* vermelho */
+  border-left: 6px solid #dc3545;
 }
-
 .priority-intermediaria {
-  border-left: 6px solid #ffc107; /* amarelo */
+  border-left: 6px solid #ffc107;
 }
-
 .priority-baixa {
-  border-left: 6px solid #198754; /* verde */
+  border-left: 6px solid #198754;
 }
-
 .priority-não\ definida {
-  border-left: 6px solid #6c757d; /* cinza */
+  border-left: 6px solid #6c757d;
 }
 
+/* Botões de ação gerais */
 .icon-button {
-  color: #495057;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 6px;
 }
+
 
 body.dark-mode .icon-button,
 body.dark-theme .icon-button {
   color: #f8f9fa;
 }
 
+.icon-button:focus {
+  outline: 2px solid; ;
+  outline-offset: 2px;
+}
+
+/* Botão confirmar (check-circle) */
+.icon-confirmar {
+  color: #38a169; 
+}
+
+.icon-confirmar:hover {
+  color: #2f855a;
+  transform: scale(1.1);
+}
+
+/* Botão excluir (lixeira) */
+.icon-excluir {
+  color: #e53e3e; 
+}
+
+.icon-excluir:hover {
+  color: #c53030;
+  transform: scale(1.1);
+}
+
 /* Modal */
 .modal {
   display: block;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
 }
 
 .modal-conteudo {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
+  background-color: #fff;
+  margin: 6% auto;
+  padding: 25px 30px;
   border: 1px solid #888;
-  width: 80%;
+  width: 90%;
   max-width: 600px;
-  border-radius: 8px;
+  border-radius: 12px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
 }
 
+body.dark-mode .modal-conteudo {
+  background-color: #2d2d2d;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+/* Botão fechar */
 .fechar {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .fechar:hover {
   color: black;
+}
+
+.fechar:focus {
+  outline: 2px solid #90cdf4;
+  outline-offset: 2px;
 }
