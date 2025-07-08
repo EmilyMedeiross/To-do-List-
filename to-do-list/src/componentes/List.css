@@ -20,6 +20,31 @@ body.dark-theme {
   color: #f0f0f0;
 }
 
+/*Conteiners Centrais (azul e branco)*/
+
+.div-central{
+  display: flex;
+
+}
+
+.div-esquerda{
+  background-color: #8a8f8b;
+  border-radius: 8px;
+  text-decoration: none; 
+  display: flex;
+  width: 500px;
+  margin-right: 10px;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+
+}
+.div-direita{
+  background-color: #2b6cb0;
+  border-radius: 8px;
+  width: 500px;
+  height: 500px;
+}
 /* Título */
 h1 {
   text-align: center;
@@ -27,6 +52,7 @@ h1 {
   color: #2b6cb0;
   margin-bottom: 1.5rem;
 }
+
 
 /* Campos de entrada */
 .input-add,
@@ -93,6 +119,7 @@ label {
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   margin: 8px 10px 0 0;
+  width: fit-content;
 }
 
 /* Variações de cor específicas para cada botão */
@@ -132,7 +159,13 @@ label {
 
 /* Lista de tarefas */
 .task-list {
-  margin-top: 2rem;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  color: #212529;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  max-height: 100%;
 }
 
 .task-list input[type="text"] {
@@ -227,27 +260,22 @@ body.dark-theme .icon-button {
 .modal {
   display: block;
   position: fixed;
-  z-index: 1000;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
 }
 
 .modal-conteudo {
-  background-color: #fff;
-  margin: 6% auto;
-  padding: 25px 30px;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
   border: 1px solid #888;
-  width: 90%;
+  width: 80%;
   max-width: 600px;
-  border-radius: 12px;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
+  border-radius: 8px;
 }
 
 body.dark-mode .modal-conteudo {
@@ -263,14 +291,25 @@ body.dark-mode .modal-conteudo {
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.2s ease;
 }
 
 .fechar:hover {
   color: black;
 }
 
-.fechar:focus {
-  outline: 2px solid #90cdf4;
-  outline-offset: 2px;
+
+/* Estilização adicional para estrutura responsiva */
+@media (max-width: 768px) {
+  .input-add {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .task-list {
+    max-height: 300px;
+  }
 }

@@ -1,13 +1,13 @@
-button {
+.btn-tema {
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
-  background-color:darkcyan;
+  background-color: darkcyan;
   color: white;
   cursor: pointer;
   margin: 10px;
 }
 
-button:hover {
+.btn-tema:hover {
   background-color: cyan;
 }

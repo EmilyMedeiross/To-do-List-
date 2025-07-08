@@ -11,7 +11,7 @@ function ChangeBackground() {
 
     return (
         <div>
-            <button onClick={handleColor}>Alternar Tema</button>
+            <button className="btn-tema" onClick={handleColor}>Alternar Tema</button>
         </div>
     )
 }

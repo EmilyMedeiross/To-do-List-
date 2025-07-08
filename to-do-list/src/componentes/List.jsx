@@ -101,11 +101,12 @@ export default function List() {
     return (
         <>
             <h1>FocoList</h1>
-
-        
             <ChangeBackground />
-
+            <div className='div-central'>
+            <div className='div-esquerda'>
+           
             <form onSubmit={handleSubmit}>
+                
                 <div className='input-add'>
                     <label>
                         <span className='titulos'>Nome da tarefa:</span>
@@ -117,7 +118,6 @@ export default function List() {
                             required
                         />
                     </label>
-                    <input className='btn btn-add' type="submit" value="Adicionar Tarefa" />
                 </div>
 
                 <div className='input-forms'>
@@ -144,6 +144,7 @@ export default function List() {
                             value={data}
                         />
                     </label>
+                    <input className='btn btn-add' type="submit" value="Adicionar Tarefa" />
                 </div>
 
                 {limiteAtingido && (
@@ -152,8 +153,11 @@ export default function List() {
                     </div>
                 )}
             </form>
+            </div>
+            <div className='div-direita'>
 
             <div className="task-list">
+
                 <h2>Pesquisar por Tarefas</h2>
 
                 <input
@@ -190,6 +194,8 @@ export default function List() {
             </div>
             <input className='btn btn-limpar' type="button" value="Limpar tarefas" onClick={handleClear} />
             <input className='btn btn-listar' type="button" value="Ver todas as tarefas" onClick={handleClick} />
+            </div>
+            </div>
 
             {modalAberto && (
                 <div className="modal">
