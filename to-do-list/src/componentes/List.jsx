@@ -48,6 +48,7 @@ export default function List() {
             status: false
         }
 
+
         if (lista.length < 20) {
             let index = lista.length
             for (let i = 0; i < lista.length; i++) {
