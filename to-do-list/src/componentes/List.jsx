@@ -1,10 +1,8 @@
 import './List.css'
 import { useState } from 'react'
-import ChangeBackground from './ChangeBackground'
-
-// Biblioteca de importação de ícones
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faBan, faTrash } from '@fortawesome/free-solid-svg-icons'
+
 
 export default function List() {
     const [tarefa, setTarefa] = useState('')
@@ -15,7 +13,8 @@ export default function List() {
     const [modalAberto, setModalAberto] = useState(false)
     const [pesquisa, setPesquisa] = useState('')
 
-    // Ordenação de tarefas por prioridade
+
+
     const tarefasOrdenadas = [...lista].sort((a, b) => {
         const ordemPrioridade = { alta: 1, intermediaria: 2, baixa: 3, 'não definida': 4 }
         return ordemPrioridade[a.prioridade] - ordemPrioridade[b.prioridade]
@@ -33,6 +32,7 @@ export default function List() {
         'não definida': tarefasOrdenadas.filter(tarefa => tarefa.prioridade === 'não definida')
     }
 
+
     function handleSubmit(e) {
         e.preventDefault()
 
@@ -47,6 +47,7 @@ export default function List() {
             data: data || 'Sem data definida',
             status: false
         }
+
 
         if (lista.length < 20) {
             let index = lista.length
@@ -101,18 +102,17 @@ export default function List() {
     return (
         <>
             <h1>FocoList</h1>
-            <ChangeBackground />
+        
             <div className='div-central'>
                 <div className='div-esquerda'>
                     <form onSubmit={handleSubmit}>
                         <div className='input-add'>
                             <label>
-                                <span className='titulos'>Nome da tarefa:</span>
+                                <span className='titulos' >Nome da tarefa:</span>
                                 <input
                                     type="text"
                                     onChange={(e) => setTarefa(e.target.value)}
                                     value={tarefa}
-                                    placeholder="Ex: Estudar React"
                                     required
                                 />
                             </label>
@@ -155,11 +155,10 @@ export default function List() {
 
                 <div className='div-direita'>
                     <div className="task-list">
-                        <h2>Pesquisar por Tarefas</h2>
+                        <h3>Pesquisar Tarefas:</h3>
                         <input
                             type="text"
                             value={pesquisa}
-                            placeholder="Ex: Arrumar a Casa"
                             onChange={(ev) => setPesquisa(ev.target.value)}
                         />
 
@@ -197,42 +196,51 @@ export default function List() {
                 </div>
             </div>
 
+
             {modalAberto && (
-                <div className="modal">
-                    <div className="modal-conteudo" style={{maxHeight: '400px', overflowY: 'auto'}}>
-                        <span className="fechar" onClick={handleClick}>&times;</span>
-                        <h2>Todas as Tarefas</h2>
+                <div className="modal active"> 
+                    <div className="modal-conteudo" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                    <span className="fechar" onClick={handleClick}>&times;</span>
+                    <h2>Todas as Tarefas</h2>
 
-                        {prioridades.map((prioridade) => {
-                            const tarefas = tarefasAgrupadas[prioridade]
-                            if (!tarefas || tarefas.length === 0) return null
+               
+                    {lista.length === 0 ? (
+                        <p className="lista-vazia">Nenhuma tarefa adicionada ainda</p>
+                    ) : (
+                        prioridades.map((prioridade) => {
+                        const tarefas = tarefasAgrupadas[prioridade];
+                        if (!tarefas || tarefas.length === 0) return null;
 
-                            return (
-                                <div key={prioridade}>
-                                    <h3>Prioridade: {prioridade}</h3>
-                                    <ul>
-                                        {tarefas.map((item) => (
-                                            <li key={item.id} className={`task-item priority-${item.prioridade}`}>
-                                                <span>Nome: {item.texto}</span><br />
-                                                <span>Data: {item.data}</span><br />
-                                                <span>Status: {item.status ? 'Concluída' : 'Pendente'}</span>
-
-                                                <button onClick={() => handleToggle(item.id)} className=" icon-button icon-confirmar">
-                                                    <FontAwesomeIcon icon={item.status ? faBan : faCheckCircle} />
-                                                </button>
-
-                                                <button onClick={() => handleClearUnique(item.id)} className=" icon-button icon-excluir">
-                                                    <FontAwesomeIcon icon={faTrash} />
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )
-                        })}
+                        return (
+                            <div key={prioridade} className="priority-section">
+                            <h3>Prioridade: {prioridade}</h3>
+                            <ul>
+                                {tarefas.map((item) => (
+                                <li key={item.id} className={`task-item priority-${item.prioridade}`}>
+                                    <div className="task-content">
+                                        <span>Nome da tarefa: {item.texto} </span>
+                                        <span>Prioridade: {item.prioridade}</span>
+                                        <span>Data: {item.data}</span>
+                                        <span>Status: {item.status ? 'Concluída' : 'Pendente'}</span>
+                                    </div>
+                                    <div className="task-actions">
+                                        <button onClick={() => handleToggle(item.id)} className="icon-button icon-confirmar">
+                                        <FontAwesomeIcon icon={item.status ? faBan : faCheckCircle} />
+                                        </button>
+                                        <button onClick={() => handleClearUnique(item.id)} className="icon-button icon-excluir">
+                                        <FontAwesomeIcon icon={faTrash} />
+                                        </button>
+                                    </div>
+                                </li>
+                                ))}
+                            </ul>
+                            </div>
+                        );
+                        })
+                    )}
                     </div>
                 </div>
-            )}
+                )}
         </>
     )
 }
