@@ -1,4 +1,4 @@
-/* Reset e base */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,12 +6,15 @@
 }
 
 body {
-  background-color: #f2f0f0;
-  color: #2d3748;
+  background-color: white;
+  color: black;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   padding: 2rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
 body.dark-mode,
@@ -20,32 +23,7 @@ body.dark-theme {
   color: #f0f0f0;
 }
 
-/*Conteiners Centrais (azul e branco)*/
 
-.div-central{
-  display: flex;
-
-}
-
-.div-esquerda{
-  background-color: #8a8f8b;
-  border-radius: 8px;
-  text-decoration: none; 
-  display: flex;
-  width: 500px;
-  margin-right: 10px;
-  height: 500px;
-  align-items: center;
-  justify-content: center;
-
-}
-.div-direita{
-  background-color: #2b6cb0;
-  border-radius: 8px;
-  width: 500px;
-  height: 500px;
-}
-/* Título */
 h1 {
   text-align: center;
   font-size: 2.5rem;
@@ -53,19 +31,63 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+/* Layout das divs */
+.div-central {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
 
-/* Campos de entrada */
+.div-esquerda {
+  flex: 1;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 500px;
+}
+
+body.dark-mode .div-esquerda,
+body.dark-theme .div-esquerda {
+  background: #2d2d2d;
+}
+
+.div-direita {
+  flex: 1;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 500px;
+}
+
+body.dark-mode .div-direita,
+body.dark-theme .div-direita {
+  background: #2d2d2d;
+}
+
+/* inputs */
 .input-add,
 .input-forms {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
 }
 
 .input-add {
   flex-direction: row;
   align-items: flex-end;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
@@ -73,7 +95,7 @@ h1 {
 input[type="text"],
 input[type="date"],
 select {
-  padding: 10px 14px;
+  padding: 12px 16px;
   font-size: 1rem;
   border: 2px solid #cbd5e0;
   border-radius: 8px;
@@ -99,6 +121,9 @@ body.dark-mode select {
 label {
   font-weight: 600;
   font-size: 0.95rem;
+  width: 100%;
+  max-width: 300px;
+  text-align: left;
 }
 
 .titulos {
@@ -112,14 +137,13 @@ label {
 .btn {
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   margin: 8px 10px 0 0;
-  width: fit-content;
 }
 
 /* Variações de cor específicas para cada botão */
@@ -155,17 +179,18 @@ label {
   color: #dc3545;
   font-weight: bold;
   margin-top: 0.5rem;
+  text-align: center;
 }
 
 /* Lista de tarefas */
 .task-list {
-  overflow-y: auto;
-  background-color: #f8f9fa;
-  color: #212529;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 12px;
-  max-height: 100%;
+  margin-top: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
 }
 
 .task-list input[type="text"] {
@@ -173,48 +198,61 @@ label {
   max-width: 300px;
 }
 
+.tarefas-container {
+  overflow-y: auto;
+  max-height: 400px;
+  flex: 1;
+  width: 100%;
+}
+
+/* Container de resultados da pesquisa com limite de 2 tarefas */
+.pesquisa-container {
+  max-height: 180px; 
+  overflow-y: auto;
+  width: 100%;
+}
+
 .lista-vazia {
   font-style: italic;
   color: #718096;
+  text-align: center;
 }
 
 /* Estilo das tarefas */
 .task-item {
-  background: #ededed;
+  background: #f8f9fa;
   color: #212529;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-left-color 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  list-style: none;
+  width: 100%;
 }
 
 body.dark-mode .task-item,
 body.dark-theme .task-item {
   background: #2d2d2d;
   color: #f8f9fa;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 
 /* Estilo da tarefa com base na prioridade */
 .priority-alta {
-  border-left: 6px solid #dc3545;
-}
-.priority-intermediaria {
-  border-left: 6px solid #ffc107;
-}
-.priority-baixa {
-  border-left: 6px solid #198754;
-}
-.priority-não\ definida {
-  border-left: 6px solid #6c757d;
+  border-left: 6px solid #dc3545; /* vermelho */
 }
 
-/* Botões de ação gerais */
+.priority-intermediaria {
+  border-left: 6px solid #ffc107; /* amarelo */
+}
+
+.priority-baixa {
+  border-left: 6px solid #198754; /* verde */
+}
+
+.priority-não\ definida {
+  border-left: 6px solid #6c757d; /* cinza */
+}
+
+/* Botões de ação - excluir e confirmar */
 .icon-button {
   background: none;
   border: none;
@@ -223,8 +261,8 @@ body.dark-theme .task-item {
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
   padding: 6px;
+  color: #495057;
 }
-
 
 body.dark-mode .icon-button,
 body.dark-theme .icon-button {
@@ -232,11 +270,11 @@ body.dark-theme .icon-button {
 }
 
 .icon-button:focus {
-  outline: 2px solid; ;
+  outline: 2px solid;
   outline-offset: 2px;
 }
 
-/* Botão confirmar (check-circle) */
+/* Botão confirmar da tarefa  */
 .icon-confirmar {
   color: #38a169; 
 }
@@ -246,7 +284,7 @@ body.dark-theme .icon-button {
   transform: scale(1.1);
 }
 
-/* Botão excluir (lixeira) */
+/* Botão excluir (lixeira) da tarefa */
 .icon-excluir {
   color: #e53e3e; 
 }
@@ -258,7 +296,7 @@ body.dark-theme .icon-button {
 
 /* Modal */
 .modal {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -266,28 +304,32 @@ body.dark-theme .icon-button {
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-conteudo {
   background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #888;
-  width: 80%;
+  width: 90%;
   max-width: 600px;
   border-radius: 8px;
+  position: relative;
 }
 
-body.dark-mode .modal-conteudo {
+body.dark-mode .modal-conteudo,
+body.dark-theme .modal-conteudo {
   background-color: #2d2d2d;
   color: #f0f0f0;
-  border-color: #555;
 }
 
-/* Botão fechar */
 .fechar {
   color: #aaa;
-  float: right;
+  position: absolute;
+  top: 10px;
+  right: 20px;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
@@ -297,19 +339,38 @@ body.dark-mode .modal-conteudo {
   color: black;
 }
 
+body.dark-mode .fechar:hover,
+body.dark-theme .fechar:hover {
+  color: #f0f0f0;
+}
 
-/* Estilização adicional para estrutura responsiva */
-@media (max-width: 768px) {
-  .input-add {
-    flex-direction: column;
-    align-items: stretch;
-  }
+.botoes-container {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
 
-  .btn {
-    width: 100%;
-  }
+/* Barra de rolagem da pesquisa */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-  .task-list {
-    max-height: 300px;
-  }
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track,
+body.dark-theme ::-webkit-scrollbar-track {
+  background: #444;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

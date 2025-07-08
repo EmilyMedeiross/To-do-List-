@@ -103,98 +103,98 @@ export default function List() {
             <h1>FocoList</h1>
             <ChangeBackground />
             <div className='div-central'>
-            <div className='div-esquerda'>
-           
-            <form onSubmit={handleSubmit}>
-                
-                <div className='input-add'>
-                    <label>
-                        <span className='titulos'>Nome da tarefa:</span>
+                <div className='div-esquerda'>
+                    <form onSubmit={handleSubmit}>
+                        <div className='input-add'>
+                            <label>
+                                <span className='titulos'>Nome da tarefa:</span>
+                                <input
+                                    type="text"
+                                    onChange={(e) => setTarefa(e.target.value)}
+                                    value={tarefa}
+                                    placeholder="Ex: Estudar React"
+                                    required
+                                />
+                            </label>
+                        </div>
+
+                        <div className='input-forms'>
+                            <label>
+                                <span className='titulos'>Prioridade da tarefa:</span>
+                                <select
+                                    value={prioridade}
+                                    onChange={(e) => setPrioridade(e.target.value)}
+                                >
+                                    <option value="">Selecione uma prioridade</option>
+                                    <option value="alta">Alta</option>
+                                    <option value="intermediaria">Intermediária</option>
+                                    <option value="baixa">Baixa</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div className='input-forms'>
+                            <label>
+                                <span className='titulos'>Data da tarefa:</span>
+                                <input
+                                    type="date"
+                                    onChange={(e) => setData(e.target.value)}
+                                    value={data}
+                                />
+                            </label>
+                            <input className='btn btn-add' type="submit" value="Adicionar Tarefa" />
+                        </div>
+
+                        {limiteAtingido && (
+                            <div className="limite-mensagem">
+                                Limite de 20 tarefas atingido! Limpe a lista para adicionar mais.
+                            </div>
+                        )}
+                    </form>
+                </div>
+
+                <div className='div-direita'>
+                    <div className="task-list">
+                        <h2>Pesquisar por Tarefas</h2>
                         <input
                             type="text"
-                            onChange={(e) => setTarefa(e.target.value)}
-                            value={tarefa}
-                            placeholder="Ex: Estudar React"
-                            required
+                            value={pesquisa}
+                            placeholder="Ex: Arrumar a Casa"
+                            onChange={(ev) => setPesquisa(ev.target.value)}
                         />
-                    </label>
-                </div>
 
-                <div className='input-forms'>
-                    <label>
-                        <span className='titulos'>Prioridade da tarefa:</span>
-                        <select
-                            value={prioridade}
-                            onChange={(e) => setPrioridade(e.target.value)}
-                        >
-                            <option value="">Selecione uma prioridade</option>
-                            <option value="alta">Alta</option>
-                            <option value="intermediaria">Intermediária</option>
-                            <option value="baixa">Baixa</option>
-                        </select>
-                    </label>
-                </div>
-
-                <div className='input-forms'>
-                    <label>
-                        <span className='titulos'>Data da tarefa:</span>
-                        <input
-                            type="date"
-                            onChange={(e) => setData(e.target.value)}
-                            value={data}
-                        />
-                    </label>
-                    <input className='btn btn-add' type="submit" value="Adicionar Tarefa" />
-                </div>
-
-                {limiteAtingido && (
-                    <div className="limite-mensagem">
-                        Limite de 20 tarefas atingido! Limpe a lista para adicionar mais.
+                        <div className="tarefas-container">
+                            {pesquisa ? (
+                                lista.length === 0 ? (
+                                    <p className="lista-vazia">Nenhuma tarefa adicionada ainda</p>
+                                ) : tarefasFiltradas.length > 0 ? (
+                                    <ul>
+                                        {tarefasFiltradas.map((item) => (
+                                            <li key={item.id} className={`task-item priority-${item.prioridade}`}>
+                                                <span>Nome da tarefa: {item.texto} </span><br />
+                                                <span>Prioridade: {item.prioridade}</span><br />
+                                                <span>Data: {item.data}</span><br />
+                                                <button onClick={() => handleToggle(item.id)} className="icon-button icon-confirmar">
+                                                    <FontAwesomeIcon icon={item.status ? faBan : faCheckCircle} />
+                                                </button>
+                                                <button onClick={() => handleClearUnique(item.id)} className="icon-button icon-excluir">
+                                                    <FontAwesomeIcon icon={faTrash} />
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p className="lista-vazia">Nenhuma tarefa encontrada</p>
+                                )
+                            ) : null}
+                        </div>
                     </div>
-                )}
-            </form>
-            </div>
-            <div className='div-direita'>
 
-            <div className="task-list">
-
-                <h2>Pesquisar por Tarefas</h2>
-
-                <input
-                    type="text"
-                    value={pesquisa}
-                    placeholder="Ex: Arrumar a Casa"
-                    onChange={(ev) => setPesquisa(ev.target.value)}
-                />
-
-                {pesquisa ? (
-                    lista.length === 0 ? (
-                        <p className="lista-vazia">Nenhuma tarefa adicionada ainda</p>
-                    ) : tarefasFiltradas.length > 0 ? (
-                        <ul>
-                            {tarefasFiltradas.map((item) => (
-                                <li key={item.id} className={`task-item priority-${item.prioridade}`}>
-                                    <span>Nome da tarefa: {item.texto} </span><br />
-                                    <span>Prioridade: {item.prioridade}</span><br />
-                                    <span>Data: {item.data}</span><br />
-                                    <button onClick={() => handleToggle(item.id)} className="icon-button icon-confirmar">
-                                        <FontAwesomeIcon icon={item.status ? faBan : faCheckCircle} />
-                                    </button>
-                                    <button onClick={() => handleClearUnique(item.id)} className="icon-button icon-excluir">
-                                        <FontAwesomeIcon icon={faTrash} />
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p className="lista-vazia">Nenhuma tarefa encontrada</p>
-                    )
-                ) : null}
-        
-            </div>
-            <input className='btn btn-limpar' type="button" value="Limpar tarefas" onClick={handleClear} />
-            <input className='btn btn-listar' type="button" value="Ver todas as tarefas" onClick={handleClick} />
-            </div>
+                    <div className="botoes-container">
+                        <input className='btn btn-limpar' type="button" value="Limpar tarefas" onClick={handleClear} />
+                        <input className='btn btn-listar' type="button" value="Ver todas as tarefas" onClick={handleClick} />
+                    </div>
+                </div>
             </div>
 
             {modalAberto && (
