@@ -41,12 +41,12 @@ body {
   max-width: 1200px;
 }
 
-
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
   background: linear-gradient(90deg, var(--azul-escuro), var(--verde-agua));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   margin: 40px 0 30px;
@@ -82,12 +82,11 @@ h1::after {
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  min-height: 500px;
+  min-height: 550px;
   box-shadow: 0 8px 30px var(--sombra);
   transition: var(--transicao);
   min-width: 300px;
 }
-
 
 .panel-header {
   width: 100%;
@@ -130,14 +129,12 @@ label {
   margin-bottom: 6px;
 }
 
-
 .titulos {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
   color: white;
 }
-
 
 input[type="text"],
 input[type="date"],
@@ -219,6 +216,9 @@ select:focus {
   color: white;
 }
 
+.input-add input{
+  color:white;
+}
 
 .limite-mensagem {
   background: rgba(217, 74, 74, 0.1);
@@ -258,7 +258,6 @@ select:focus {
   font-size: 1.05rem;
 }
 
-
 .search-icon {
   position: absolute;
   left: 15px;
@@ -268,41 +267,41 @@ select:focus {
   font-size: 1.2rem;
 }
 
-
 .tarefas-container {
-  overflow-y: auto;
-  max-height: 400px;
-  flex: 1;
   width: 100%;
+  max-height: 200px; 
+  overflow-y: hidden;
+  position: relative;
+  margin-top: 10px;
   padding: 5px;
 }
 
-.lista-vazia {
-  font-style: italic;
-  color: var(--azul-medio);
-  text-align: center;
-  padding: 30px 20px;
-  background: rgba(242, 227, 213, 0.3);
-  border-radius: 10px;
-  margin-top: 20px;
+.tarefas-container:has(> ul > li:nth-child(3)) {
+  overflow-y: auto;
+}
+
+.tarefas-container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 5px;
 }
 
 .task-item {
   background: var(--branco);
   color: var(--azul-escuro);
-  padding: 18px;
-  margin: 12px 0;
+  padding: 16px;
   border-radius: 12px;
   list-style: none;
   width: 100%;
   box-shadow: 0 3px 10px var(--sombra);
   transition: var(--transicao);
   position: relative;
-  overflow: hidden;
+  min-height: 110px;
 }
 
 .task-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   box-shadow: 0 5px 15px var(--sombra-escura);
 }
 
@@ -315,6 +314,27 @@ select:focus {
   width: 6px;
 }
 
+.task-content {
+  margin-bottom: 10px;
+  padding-right: 80px;
+}
+
+.task-content span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  white-space: normal; 
+  word-wrap: break-word;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
 
 .priority-alta:before {
   background: var(--vermelho);
@@ -327,22 +347,6 @@ select:focus {
 }
 .priority-não\ definida:before {
   background: var(--azul-medio);
-}
-
-.task-content {
-  margin-bottom: 15px;
-}
-
-.task-content span {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 0.95rem;
-}
-
-.task-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
 }
 
 .icon-button {
@@ -379,12 +383,13 @@ select:focus {
 }
 
 .botoes-container {
-  margin-top: 2rem;
+  margin-top: auto;
   display: flex;
   gap: 1.5rem;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
+  padding-top: 20px;
 }
 
 .stats-bar {
@@ -400,7 +405,6 @@ select:focus {
   width: 100%;
 }
 
-
 .stats-item {
   display: flex;
   flex-direction: column;
@@ -413,10 +417,10 @@ select:focus {
   font-weight: 700;
   margin-bottom: 5px;
   background: linear-gradient(90deg, var(--azul-escuro), var(--verde-agua));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 .stats-label {
   font-size: 0.9rem;
@@ -462,6 +466,21 @@ select:focus {
   transform: translateY(0);
 }
 
+.modal .task-item {
+  min-height: auto;
+  margin-bottom: 12px;
+}
+
+.modal .task-content {
+  padding-right: 80px;
+}
+
+.modal .task-actions {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 .fechar {
   color: var(--azul-medio);
@@ -486,7 +505,6 @@ select:focus {
   transform: rotate(90deg);
 }
 
-
 .priority-section {
   margin-bottom: 25px;
   background: rgba(242, 227, 213, 0.2);
@@ -499,4 +517,33 @@ select:focus {
   padding-bottom: 10px;
   border-bottom: 1px solid var(--bege-claro);
   color: var(--azul-escuro);
+}
+
+.lista-vazia {
+  font-style: italic;
+  color: var(--azul-medio);
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(242, 227, 213, 0.3);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* Barra de rolagem */
+.tarefas-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tarefas-container::-webkit-scrollbar-track {
+  background: rgba(242, 227, 213, 0.3);
+  border-radius: 10px;
+}
+
+.tarefas-container::-webkit-scrollbar-thumb {
+  background: var(--azul-medio);
+  border-radius: 10px;
+}
+
+.tarefas-container::-webkit-scrollbar-thumb:hover {
+  background: var(--azul-escuro);
 }
