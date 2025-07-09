@@ -112,8 +112,10 @@ export default function List() {
                                 <input
                                     type="text"
                                     onChange={(e) => setTarefa(e.target.value)}
+                                    placeholder='Ex: Estudar'
                                     value={tarefa}
                                     required
+                                   
                                 />
                             </label>
                         </div>
